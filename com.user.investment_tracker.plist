@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.investment_tracker</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/bike/ai agent/investment_tracker/venv/bin/python</string>
+        <string>/Users/bike/ai agent/investment_tracker/tracker.py</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>20</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/bike/ai agent/investment_tracker</string>
+    <key>StandardOutPath</key>
+    <string>/Users/bike/ai agent/investment_tracker/data/tracker_stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/bike/ai agent/investment_tracker/data/tracker_stderr.log</string>
+</dict>
+</plist>

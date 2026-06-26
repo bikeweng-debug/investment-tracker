@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投資標的每日換股追蹤儀表板</title>
+  <meta name="description" content="自動追蹤主動式 ETF 與共同基金的持股變動，即時比對買進、賣出、加碼與減碼明細。">
+  
+  <!-- 載入 Google Fonts & Chart.js -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* 全域 CSS 變數與 Reset */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      /* 變動主題色 */
+      --color-add: #10b981;
+      --color-remove: #ef4444;
+      --color-increase: #3b82f6;
+      --color-decrease: #a855f7;
+      --color-primary: #6366f1;
+      --color-primary-glow: rgba(99, 102, 241, 0.35);
+      
+      --font-outfit: 'Outfit', 'Inter', sans-serif;
+      --font-inter: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-inter);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* 頂部 Header */
+    header {
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--color-primary-glow);
+    }
+
+    .logo-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: #fff;
+    }
+
+    .header-title {
+      font-family: var(--font-outfit);
+      font-size: 1.35rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #fff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .update-badge {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      color: #a5b4fc;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .update-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #4ade80;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    /* 主畫面配置 */
+    .dashboard-container {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    /* 側邊欄 Sidebar */
+    .sidebar {
+      width: 320px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sidebar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .sidebar-section-title {
+      font-family: var(--font-outfit);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-left: 3px solid var(--color-primary);
+      padding-left: 0.5rem;
+    }
+
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 0.25rem;
+    }
+
+    /* 自訂捲軸 */
+    .list-container::-webkit-scrollbar {
+      width: 4px;
+    }
+    .list-container::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+    }
+
+    .list-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .list-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateX(4px);
+    }
+
+    .list-item.active {
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.05) 100%);
+      border-color: var(--color-primary);
+      box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.15);
+    }
+
+    .item-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .item-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .item-symbol {
+      font-family: var(--font-outfit);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .item-badge {
+      background: var(--color-add);
+      color: #0f172a;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+    }
+
+    .item-badge.change-dot {
+      background: #ef4444;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    }
+
+    /* 主視窗 Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-title-group h2 {
+      font-family: var(--font-outfit);
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      background: linear-gradient(to right, #fff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-tag {
+      background: rgba(255,255,255,0.06);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* 換股看板 */
+    .changes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .changes-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .card-title-bar {
+      font-family: var(--font-outfit);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .changes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .change-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .change-item:hover {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .stk-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .stk-code {
+      font-family: var(--font-outfit);
+      font-size: 0.75rem;
+      background: rgba(255,255,255,0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .stk-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .stk-value {
+      font-family: var(--font-outfit);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stk-value.add { color: var(--color-add); }
+    .stk-value.remove { color: var(--color-remove); }
+    .stk-value.increase { color: var(--color-increase); }
+    .stk-value.decrease { color: var(--color-decrease); }
+
+    /* 空狀態顯示 */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      gap: 1rem;
+    }
+
+    .empty-icon {
+      width: 4rem;
+      height: 4rem;
+      opacity: 0.35;
+    }
+
+    /* 下方數據與圖表 */
+    .details-row {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 1.5rem;
+    }
+
+    .chart-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      height: 280px;
+    }
+
+    .holdings-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .holdings-table-container {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 360px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 0.9rem;
+    }
+
+    tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .pct-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.35rem;
+    }
+
+    .pct-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      border-radius: 3px;
+    }
+
+    /* 頁尾 */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.3);
+    }
+
+    /* 錯誤/引導畫面 */
+    .error-container {
+      max-width: 600px;
+      margin: 6rem auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .error-title {
+      font-family: var(--font-outfit);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ef4444;
+    }
+
+    .error-desc {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--color-primary-glow);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(99, 102, 241, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頁首 Header -->
+  <header>
+    <div class="header-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+        </svg>
+      </div>
+      <h1 class="header-title" id="web-title">投資標的每日換股追蹤儀表板</h1>
+    </div>
+    <div class="header-info">
+      <div class="update-badge" id="update-badge">
+        <span class="update-dot"></span>
+        <span id="update-time-text">載入中...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 未載入資料的引導介面 -->
+  <div class="error-container" id="no-data-card" style="display: none;">
+    <div class="error-title">尚未發現追蹤資料</div>
+    <div class="error-desc">
+      請先於本機終端機中執行 <code>python tracker.py</code> 進行首次持股抓取。<br>
+      抓取成功後，系統將自動產出 <code>data.js</code>，此儀表板即可即時呈現您的投資標的與換股明細！
+    </div>
+    <button class="btn" onclick="window.location.reload()">重新整理網頁</button>
+  </div>
+
+  <!-- 主要儀表板 Container -->
+  <div class="dashboard-container" id="dashboard-main">
+    
+    <!-- 側邊欄：標的清單 -->
+    <div class="sidebar">
+      <!-- ETF 清單 -->
+      <div class="sidebar-card">
+        <h3 class="sidebar-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          主動/被動型 ETF
+        </h3>
+        <div class="list-container" id="etf-list">
+          <!-- 動態渲染 ETF -->
+        </div>
+      </div>
+      
+      <!-- 共同基金清單 -->
+      <div class="sidebar-card">
+        <h3 class="sidebar-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+          </svg>
+          一般共同基金 (月更)
+        </h3>
+        <div class="list-container" id="fund-list">
+          <!-- 動態渲染 基金 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 主要內容區：詳細資訊 -->
+    <div class="main-content">
+      
+      <!-- 英雄大卡片：顯示當前選擇 -->
+      <div class="hero-card">
+        <div>
+          <h2 id="target-name">--</h2>
+          <div class="hero-subtitle">
+            <span id="target-symbol" class="hero-tag">--</span>
+            <span>比對基準日期: <strong id="compare-base-date">--</strong></span>
+          </div>
+        </div>
+        <div class="hero-tag" id="target-type" style="font-weight: 600; color: #a5b4fc; background: rgba(99,102,241,0.15)">
+          --
+        </div>
+      </div>
+
+      <!-- 換股變動看板 (Grid 兩欄) -->
+      <div class="changes-grid" id="changes-view">
+        <!-- 加碼 & 新增 -->
+        <div class="changes-card">
+          <div class="card-title-bar" style="color: var(--color-add);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            持股新增與加碼
+          </div>
+          <div class="changes-list" id="positives-list">
+            <!-- 動態渲染新增/加碼 -->
+          </div>
+        </div>
+
+        <!-- 減碼 & 剔除 -->
+        <div class="changes-card">
+          <div class="card-title-bar" style="color: var(--color-remove);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            持股減碼與剔除
+          </div>
+          <div class="changes-list" id="negatives-list">
+            <!-- 動態渲染減碼/剔除 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 持股明細與圖表 -->
+      <div class="details-row">
+        <!-- 左：圓餅圖 -->
+        <div class="chart-card">
+          <h4 class="sidebar-section-title" style="margin-bottom: 1.5rem; align-self: flex-start;">前十大持股比例</h4>
+          <div class="chart-container">
+            <canvas id="holdingsChart"></canvas>
+          </div>
+        </div>
+
+        <!-- 右：表格明細 -->
+        <div class="holdings-card">
+          <h4 class="sidebar-section-title" style="margin-bottom: 1.25rem;">詳細成分股明細</h4>
+          <div class="holdings-table-container">
+            <table id="holdings-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">代號</th>
+                  <th>股票名稱</th>
+                  <th style="text-align: right; width: 140px;">持股比例</th>
+                </tr>
+              </thead>
+              <tbody id="holdings-table-body">
+                <!-- 動態表格 -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 頁尾 -->
+  <footer>
+    <p>投資標的每日換股追蹤系統 © 2026. 數據源來自 CMoney & MoneyDJ</p>
+  </footer>
+
+  <!-- 引入 data.js (由 Python 動態生成) -->
+  <script src="data.js"></script>
+
+  <script>
+    // 全域變數定義
+    let chartInstance = null;
+    let selectedSymbol = null;
+
+    // 檢查是否有資料
+    function checkDataAndInit() {
+      if (typeof window.dashboardData === 'undefined') {
+        document.getElementById('dashboard-main').style.display = 'none';
+        document.getElementById('no-data-card').style.display = 'block';
+        return;
+      }
+      
+      const data = window.dashboardData;
+      // 設定更新時間
+      document.getElementById('update-time-text').innerText = '資料更新: ' + data.updateTime;
+      
+      // 分組 ETF 與基金
+      const etfs = [];
+      const funds = [];
+      
+      data.results.forEach(res => {
+        // 判斷是否為基金：基金 symbol 通常為英文字開頭，如 ACPS10；ETF 通常為純數字或帶 A，如 00403A
+        if (res.symbol.startsWith('AC')) {
+          funds.append ? funds.push(res) : funds.push(res);
+        } else {
+          etfs.push(res);
+        }
+      });
+      
+      // 渲染側邊欄
+      renderSidebar(etfs, 'etf-list');
+      renderSidebar(funds, 'fund-list');
+      
+      // 預設選取第一個標的
+      if (data.results.length > 0) {
+        selectTarget(data.results[0].symbol);
+      }
+    }
+
+    // 渲染側邊欄清單
+    function renderSidebar(targets, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      
+      targets.forEach(res => {
+        const item = document.createElement('div');
+        item.className = 'list-item';
+        item.id = 'sidebar-item-' + res.symbol;
+        item.onclick = () => selectTarget(res.symbol);
+        
+        let badgeHtml = '';
+        if (res.compare && res.compare.has_changes) {
+          // 若有變動，顯示紅色呼吸燈徽章
+          badgeHtml = '<span class="item-badge change-dot">NEW</span>';
+        }
+        
+        item.innerHTML = `
+          <div class="item-meta">
+            <span class="item-name">${res.name}</span>
+            <span class="item-symbol">${res.symbol}</span>
+          </div>
+          ${badgeHtml}
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // 選取特定標的並更新主畫面
+    function selectTarget(symbol) {
+      selectedSymbol = symbol;
+      const data = window.dashboardData;
+      const target = data.results.find(res => res.symbol === symbol);
+      if (!target) return;
+      
+      // 更新側邊欄 Active 樣式
+      document.querySelectorAll('.list-item').forEach(el => el.classList.remove('active'));
+      const activeItem = document.getElementById('sidebar-item-' + symbol);
+      if (activeItem) activeItem.classList.add('active');
+      
+      // 更新英雄大卡片
+      document.getElementById('target-name').innerText = target.name;
+      document.getElementById('target-symbol').innerText = target.symbol;
+      document.getElementById('target-type').innerText = symbol.startsWith('AC') ? '國內一般共同基金' : '主動/被動型 ETF';
+      
+      const compare = target.compare;
+      const compareBaseDate = document.getElementById('compare-base-date');
+      
+      if (compare) {
+        compareBaseDate.innerText = compare.prev_date;
+      } else {
+        compareBaseDate.innerText = '首次抓取 (無歷史比對資料)';
+      }
+      
+      // 渲染換股變動看板
+      renderChanges(compare);
+      
+      // 渲染成分股表格
+      renderTable(target.holdings);
+      
+      // 渲染成分股圓餅圖
+      renderChart(target.holdings);
+    }
+
+    // 渲染變動看板
+    function renderChanges(compare) {
+      const positives = document.getElementById('positives-list');
+      const negatives = document.getElementById('negatives-list');
+      
+      positives.innerHTML = '';
+      negatives.innerHTML = '';
+      
+      // 沒有比對資料
+      if (!compare) {
+        const emptyBase = `
+          <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+            </svg>
+            <p>首次抓取，尚無歷史對比資料。</p>
+          </div>
+        `;
+        positives.innerHTML = emptyBase;
+        negatives.innerHTML = emptyBase;
+        return;
+      }
+      
+      // 今日無變動
+      if (!compare.has_changes) {
+        const emptyNoChange = `
+          <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <p>今日無任何持股變動。</p>
+          </div>
+        `;
+        positives.innerHTML = emptyNoChange;
+        negatives.innerHTML = emptyNoChange;
+        return;
+      }
+      
+      // 渲染新增與加碼 (Positive)
+      let positiveCount = 0;
+      compare.added.forEach(item => {
+        positiveCount++;
+        positives.appendChild(createChangeItemElement(item, 'add', '🆕 新增'));
+      });
+      compare.increased.forEach(item => {
+        positiveCount++;
+        positives.appendChild(createChangeItemElement(item, 'increase', '📈 加碼'));
+      });
+      
+      if (positiveCount === 0) {
+        positives.innerHTML = `
+          <div class="empty-state" style="padding: 2rem;">
+            <p>今日無持股新增或加碼。</p>
+          </div>
+        `;
+      }
+      
+      // 渲染剔除與減碼 (Negative)
+      let negativeCount = 0;
+      compare.removed.forEach(item => {
+        negativeCount++;
+        negatives.appendChild(createChangeItemElement(item, 'remove', '❌ 剔除'));
+      });
+      compare.decreased.forEach(item => {
+        negativeCount++;
+        negatives.appendChild(createChangeItemElement(item, 'decrease', '📉 減碼'));
+      });
+      
+      if (negativeCount === 0) {
+        negatives.innerHTML = `
+          <div class="empty-state" style="padding: 2rem;">
+            <p>今日無持股減碼或剔除。</p>
+          </div>
+        `;
+      }
+    }
+
+    // 建立變動個股元素
+    function createChangeItemElement(item, typeClass, label) {
+      const el = document.createElement('div');
+      el.className = 'change-item';
+      
+      const codeHtml = item.code ? `<span class="stk-code">${item.code}</span>` : '';
+      const diffSign = item.diff > 0 ? '+' : '';
+      
+      el.innerHTML = `
+        <div class="stk-info">
+          ${codeHtml}
+          <span class="stk-name">${item.name}</span>
+        </div>
+        <div class="stk-value ${typeClass}">
+          <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.35rem; border-radius: 4px; color: var(--text-muted)">${label}</span>
+          <span>${item.weight}% (${diffSign}${item.diff.toFixed(2)}%)</span>
+        </div>
+      `;
+      return el;
+    }
+
+    // 渲染成分股表格
+    function renderTable(holdings) {
+      const tbody = document.getElementById('holdings-table-body');
+      tbody.innerHTML = '';
+      
+      holdings.forEach(h => {
+        const tr = document.createElement('tr');
+        const codeDisplay = h.stock_code ? h.stock_code : '--';
+        
+        tr.innerHTML = `
+          <td style="font-family: var(--font-outfit); font-size: 0.8rem; color: var(--text-muted); font-weight: 500">${codeDisplay}</td>
+          <td style="font-weight: 600">${h.stock_name}</td>
+          <td style="text-align: right;">
+            <span style="font-family: var(--font-outfit); font-weight: 600">${h.weight.toFixed(2)}%</span>
+            <div class="pct-bar-bg">
+              <div class="pct-bar-fill" style="width: ${h.weight}%"></div>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // 渲染 Chart.js 圖表
+    function renderChart(holdings) {
+      const ctx = document.getElementById('holdingsChart').getContext('2d');
+      
+      // 取得前 5 大持股，其餘算在「其他」中
+      const topHoldings = holdings.slice(0, 5);
+      const labels = topHoldings.map(h => h.stock_name);
+      const data = topHoldings.map(h => h.weight);
+      
+      const topSum = data.reduce((a, b) => a + b, 0);
+      if (holdings.length > 5) {
+        labels.push('其他成分股');
+        data.push(100.0 - topSum);
+      }
+      
+      const chartColors = [
+        '#6366f1', // Indigo
+        '#8b5cf6', // Violet
+        '#ec4899', // Pink
+        '#3b82f6', // Blue
+        '#10b981', // Emerald
+        'rgba(255, 255, 255, 0.08)' // Muted White
+      ];
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data,
+            backgroundColor: chartColors,
+            borderWidth: 0,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                color: '#94a3b8',
+                font: {
+                  size: 11,
+                  family: "'Inter', sans-serif"
+                },
+                padding: 15,
+                boxWidth: 8,
+                boxHeight: 8,
+                usePointStyle: true
+              }
+            },
+            tooltip: {
+              backgroundColor: '#1e293b',
+              titleColor: '#fff',
+              bodyColor: '#cbd5e1',
+              borderColor: 'rgba(255,255,255,0.08)',
+              borderWidth: 1,
+              padding: 12,
+              callbacks: {
+                label: function(context) {
+                  return ' ' + context.label + ': ' + context.raw.toFixed(2) + '%';
+                }
+              }
+            }
+          },
+          cutout: '75%'
+        }
+      });
+    }
+
+    // 初始化頁面
+    window.onload = checkDataAndInit;
+  </script>
+</body>
+</html>

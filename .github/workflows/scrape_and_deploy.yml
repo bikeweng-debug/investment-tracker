@@ -1,0 +1,56 @@
+name: Daily Scrape & Deploy
+
+on:
+  schedule:
+    # 每日台北時間 20:45 執行 (UTC 時間 12:45)
+    - cron: '45 12 * * *'
+  workflow_dispatch: # 允許手動在 GitHub 介面觸發
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js (for parsing CMoney JS data)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Tracker
+      env:
+        LINE_NOTIFY_TOKEN: ${{ secrets.LINE_NOTIFY_TOKEN }}
+      run: |
+        python tracker.py
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # 將 holdings 資料庫、網頁 data.js 及 Markdown 報告加入暫存區
+        git add data/holdings.db data.js reports/
+        
+        # 檢查是否有變更，若有變更則提交並推送
+        if git diff-index --quiet HEAD; then
+          echo "No changes to commit today."
+        else
+          git commit -m "Auto-update holdings database, data.js, and reports [skip ci]"
+          git push
+        fi

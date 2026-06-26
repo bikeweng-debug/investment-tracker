@@ -1,0 +1,14 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Temporary files
+temp_*.js
+
+# macOS
+.DS_Store
+
+# Logs
+data/*.log
+*.log

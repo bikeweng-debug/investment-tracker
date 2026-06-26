@@ -1,0 +1,25 @@
+{
+  "line_notify_token": "",
+  "obsidian_vault_path": "",
+  "reports_dir": "./reports",
+  "db_path": "./data/holdings.db",
+  "etfs": [
+    {"symbol": "00403A.TW", "name": "主動統一升級50主動式 ETF", "wantgoo_id": "00403A"},
+    {"symbol": "00980A.TW", "name": "主動野村臺灣優選主動式 ETF", "wantgoo_id": "00980A"},
+    {"symbol": "00981A.TW", "name": "主動統一台股增長主動式 ETF", "wantgoo_id": "00981A"},
+    {"symbol": "00982A.TW", "name": "主動群益台灣強棒主動式 ETF", "wantgoo_id": "00982A"},
+    {"symbol": "00992A.TW", "name": "主動群益科技創新主動式 ETF", "wantgoo_id": "00992A"},
+    {"symbol": "009816.TW", "name": "凱基台灣TOP 50 ETF", "wantgoo_id": "009816"},
+    {"symbol": "00407A.TW", "name": "主動凱基台灣主動式 ETF", "wantgoo_id": "00407A"}
+  ],
+  "funds": [
+    {"symbol": "ACPS10", "name": "統一奔騰基金", "cnyes_id": "001090"},
+    {"symbol": "ACCY149", "name": "國泰台灣高股息基金", "cnyes_id": "CT000035"},
+    {"symbol": "AC0001", "name": "野村鴻運基金", "cnyes_id": "001026"},
+    {"symbol": "ACDD04", "name": "安聯台灣科技基金", "cnyes_id": "AL000001"},
+    {"symbol": "ACPS02", "name": "統一黑馬基金", "cnyes_id": "UPAMC003"},
+    {"symbol": "ACCP03", "name": "瀚亞高科技基金", "cnyes_id": "001099"},
+    {"symbol": "ACKH19", "name": "野村高科技基金-累積型(台幣)", "cnyes_id": ""},
+    {"symbol": "ACIC06", "name": "野村e科技基金", "cnyes_id": ""}
+  ]
+}
