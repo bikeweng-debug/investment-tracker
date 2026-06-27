@@ -1,6 +1,6 @@
 window.dashboardData = {
-  "updateTime": "2026-06-26 20:51:30",
-  "date": "2026-06-26",
+  "updateTime": "2026-06-27 14:16:41",
+  "date": "2026-06-27",
   "results": [
     {
       "symbol": "00403A.TW",
@@ -58,70 +58,12 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-06-25",
-        "has_changes": true,
-        "added": [
-          {
-            "name": "國巨*",
-            "code": "2327",
-            "weight": 6.15,
-            "diff": 6.15
-          },
-          {
-            "name": "奇鋐",
-            "code": "3017",
-            "weight": 4.42,
-            "diff": 4.42
-          },
-          {
-            "name": "台光電",
-            "code": "2383",
-            "weight": 4.28,
-            "diff": 4.28
-          },
-          {
-            "name": "旺矽",
-            "code": "6223",
-            "weight": 3.68,
-            "diff": 3.68
-          },
-          {
-            "name": "聯發科",
-            "code": "2454",
-            "weight": 3.36,
-            "diff": 3.36
-          },
-          {
-            "name": "智邦",
-            "code": "2345",
-            "weight": 3.01,
-            "diff": 3.01
-          }
-        ],
-        "removed": [
-          {
-            "name": "鴻海",
-            "code": "2317",
-            "weight": 5.0,
-            "diff": -5.0
-          }
-        ],
-        "increased": [
-          {
-            "name": "台積電",
-            "code": "2330",
-            "weight": 18.19,
-            "diff": 0.6900000000000013
-          }
-        ],
-        "decreased": [
-          {
-            "name": "聯電",
-            "code": "2303",
-            "weight": 7.41,
-            "diff": -0.5899999999999999
-          }
-        ]
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
       }
     },
     {
@@ -179,7 +121,14 @@ window.dashboardData = {
           "weight": 3.07
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "00981A.TW",
@@ -236,7 +185,14 @@ window.dashboardData = {
           "weight": 3.73
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "00982A.TW",
@@ -293,7 +249,14 @@ window.dashboardData = {
           "weight": 3.2816
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "00992A.TW",
@@ -350,7 +313,14 @@ window.dashboardData = {
           "weight": 4.1837
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "009816.TW",
@@ -407,7 +377,14 @@ window.dashboardData = {
           "weight": 1.87
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "00407A.TW",
@@ -464,7 +441,14 @@ window.dashboardData = {
           "weight": 2.32
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "ACPS10",
@@ -521,7 +505,14 @@ window.dashboardData = {
           "weight": 7.04
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "ACCY149",
@@ -578,7 +569,14 @@ window.dashboardData = {
           "weight": 2.46
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "AC0001",
@@ -635,7 +633,14 @@ window.dashboardData = {
           "weight": 5.29
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "ACDD04",
@@ -692,7 +697,14 @@ window.dashboardData = {
           "weight": 5.45
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "ACPS02",
@@ -749,7 +761,14 @@ window.dashboardData = {
           "weight": 4.93
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "ACCP03",
@@ -806,7 +825,14 @@ window.dashboardData = {
           "weight": 7.57
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "ACKH19",
@@ -863,7 +889,14 @@ window.dashboardData = {
           "weight": 7.57
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     },
     {
       "symbol": "ACIC06",
@@ -920,7 +953,14 @@ window.dashboardData = {
           "weight": 7.58
         }
       ],
-      "compare": null
+      "compare": {
+        "prev_date": "2026-06-26",
+        "has_changes": false,
+        "added": [],
+        "removed": [],
+        "increased": [],
+        "decreased": []
+      }
     }
   ]
 };
