@@ -545,6 +545,11 @@
       box-shadow: 0 0 22px rgba(99, 102, 241, 0.5);
     }
 
+    /* 下拉選單樣式 (預設在寬螢幕隱藏) */
+    .modern-select {
+      display: none;
+    }
+
     /* 自訂圖例樣式 (通用，預設在寬螢幕隱藏) */
     .custom-legend-container {
       display: none;
@@ -637,18 +642,9 @@
         gap: 0.75rem;
       }
 
-      /* 側邊欄：手機下恢復為縱向選單卡片 */
+      /* 側邊欄：手機下隱藏 (改用下拉選單代替) */
       .sidebar {
-        width: 100%;
-        flex-direction: column;
-        gap: 0.75rem;
-        overflow-x: visible;
-        white-space: normal;
-        position: static;
-        background: transparent;
-        border-bottom: none;
-        margin: 0;
-        padding: 0;
+        display: none !important;
       }
 
       .sidebar-card {
@@ -759,11 +755,28 @@
         min-width: 0;
       }
 
-      .hero-card h2 {
-        font-size: 1.15rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      #target-name {
+        display: none; /* 手機上隱藏靜態標題，改用 select 下拉選單 */
+      }
+
+      .modern-select {
+        display: block;
+        width: 100%;
+        padding: 0.6rem 2.25rem 0.6rem 1rem;
+        background: rgba(30, 41, 59, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: var(--text-main);
+        font-size: 0.95rem;
+        font-weight: 600;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 20px;
+        cursor: pointer;
+        backdrop-filter: blur(12px);
       }
 
       .hero-subtitle {
@@ -890,14 +903,17 @@
       
       <!-- 英雄大卡片：顯示當前選擇 -->
       <div class="hero-card">
-        <div>
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 0.5rem; min-width: 0;">
+          <!-- 電腦版標題 -->
           <h2 id="target-name">--</h2>
+          <!-- 手機版下拉選單 -->
+          <select id="target-select" class="modern-select"></select>
           <div class="hero-subtitle">
             <span id="target-symbol" class="hero-tag">--</span>
-            <span>比對基準日期: <strong id="compare-base-date">--</strong></span>
+            <span>比對基準: <strong id="compare-base-date">--</strong></span>
           </div>
         </div>
-        <div class="hero-tag" id="target-type" style="font-weight: 600; color: #a5b4fc; background: rgba(99,102,241,0.15)">
+        <div class="hero-tag" id="target-type" style="font-weight: 600; color: #a5b4fc; background: rgba(99,102,241,0.15); margin-left: 0.5rem; flex-shrink: 0;">
           --
         </div>
       </div>
@@ -1021,10 +1037,47 @@
       renderSidebar(etfs, 'etf-list');
       renderSidebar(funds, 'fund-list');
       
+      // 初始化手機版下拉選單
+      initTargetSelect(etfs, funds);
+      
       // 預設選取第一個標的 (即主頁綜合排行)
       if (data.results.length > 0) {
         selectTarget(data.results[0].symbol);
       }
+    }
+
+    // 初始化手機版下拉選單選項
+    function initTargetSelect(etfs, funds) {
+      const select = document.getElementById('target-select');
+      if (!select) return;
+      select.innerHTML = '';
+      
+      // 監聽選單切換事件
+      select.onchange = (e) => {
+        selectTarget(e.target.value);
+      };
+      
+      // ETF 分組 (包含 TOTAL 主頁)
+      const optgroupEtfs = document.createElement('optgroup');
+      optgroupEtfs.label = '主動/被動型 ETF';
+      etfs.forEach(e => {
+        const opt = document.createElement('option');
+        opt.value = e.symbol;
+        opt.innerText = e.symbol === 'TOTAL' ? e.name : `${e.name} (${e.symbol})`;
+        optgroupEtfs.appendChild(opt);
+      });
+      select.appendChild(optgroupEtfs);
+      
+      // 基金分組
+      const optgroupFunds = document.createElement('optgroup');
+      optgroupFunds.label = '一般共同基金 (月更)';
+      funds.forEach(f => {
+        const opt = document.createElement('option');
+        opt.value = f.symbol;
+        opt.innerText = `${f.name} (${f.symbol})`;
+        optgroupFunds.appendChild(opt);
+      });
+      select.appendChild(optgroupFunds);
     }
 
     // 計算所有主動式 ETF 的綜合持股排行
@@ -1117,6 +1170,10 @@
       const data = window.dashboardData;
       const target = data.results.find(res => res.symbol === symbol);
       if (!target) return;
+      
+      // 同步更新手機版下拉選單選取狀態
+      const select = document.getElementById('target-select');
+      if (select) select.value = symbol;
       
       // 更新側邊欄 Active 樣式
       document.querySelectorAll('.list-item').forEach(el => el.classList.remove('active'));
