@@ -796,6 +796,7 @@
       }
 
       .details-row {
+        display: flex; /* 覆蓋原本的 display: grid */
         flex-direction: column;
         gap: 1rem;
       }
@@ -803,6 +804,7 @@
       .chart-card, .holdings-card {
         width: 100%;
         padding: 1.25rem;
+        min-height: auto; /* 覆寫電腦版的 420px 最小高度 */
       }
       
       .chart-container {
