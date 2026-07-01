@@ -10,7 +10,8 @@
     {"symbol": "00982A.TW", "name": "主動群益台灣強棒主動式 ETF", "wantgoo_id": "00982A"},
     {"symbol": "00992A.TW", "name": "主動群益科技創新主動式 ETF", "wantgoo_id": "00992A"},
     {"symbol": "009816.TW", "name": "凱基台灣TOP 50 ETF", "wantgoo_id": "009816"},
-    {"symbol": "00407A.TW", "name": "主動凱基台灣主動式 ETF", "wantgoo_id": "00407A"}
+    {"symbol": "00407A.TW", "name": "主動凱基台灣主動式 ETF", "wantgoo_id": "00407A"},
+    {"symbol": "00991A.TW", "name": "主動復華未來50主動式 ETF", "wantgoo_id": "00991A"}
   ],
   "funds": [
     {"symbol": "ACPS10", "name": "統一奔騰基金", "cnyes_id": "001090"},

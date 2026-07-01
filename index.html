@@ -544,6 +544,158 @@
       transform: translateY(-2px);
       box-shadow: 0 0 22px rgba(99, 102, 241, 0.5);
     }
+
+    /* 手機版 (RWD) 以手機瀏覽為主的配置 */
+    @media (max-width: 768px) {
+      header {
+        position: static; /* 手機上 header 可以隨頁面捲走 */
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+        text-align: center;
+      }
+
+      .header-title {
+        font-size: 1.15rem;
+      }
+
+      .dashboard-container {
+        flex-direction: column;
+        padding: 0.75rem;
+        gap: 0.75rem;
+      }
+
+      /* 側邊欄改為頂部水平滾動導覽列 */
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        gap: 0.5rem;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+        position: sticky;
+        top: 0; /* 黏在最頂部 */
+        z-index: 100;
+        background: #0f172a;
+        margin: 0;
+        border-bottom: 1px solid var(--card-border);
+        /* 隱藏捲軸 */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      
+      .sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .sidebar-card {
+        display: contents; /* 讓內層的 list-container 直接排在 flex 中 */
+      }
+
+      .sidebar-section-title {
+        display: none;
+      }
+
+      .list-container {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        max-height: none;
+        overflow-y: visible;
+        padding: 0;
+      }
+
+      .list-item {
+        padding: 0.45rem 0.85rem;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .list-item .item-meta {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .list-item .item-name {
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .list-item .item-symbol {
+        font-size: 0.65rem;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0.05rem 0.25rem;
+        border-radius: 3px;
+        color: var(--text-muted);
+      }
+
+      .list-item.active {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        border-color: transparent;
+        box-shadow: 0 0 10px var(--color-primary-glow);
+      }
+
+      .list-item.active .item-symbol {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+
+      .list-item .item-badge {
+        position: static;
+        transform: none;
+        margin-left: 0.25rem;
+        font-size: 0.6rem;
+        padding: 0.1rem 0.3rem;
+      }
+
+      /* 主內容區 */
+      .main-content {
+        gap: 0.75rem;
+      }
+
+      .hero-card {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .hero-card h2 {
+        font-size: 1.2rem;
+      }
+
+      .changes-grid {
+        grid-template-columns: 1fr; /* 單欄變動 */
+        gap: 0.75rem;
+      }
+
+      .details-row {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .chart-card, .holdings-card {
+        width: 100%;
+        padding: 1.25rem;
+      }
+      
+      .chart-container {
+        height: 240px;
+      }
+
+      /* 表格在手機上的調整 */
+      table th, table td {
+        padding: 0.65rem 0.5rem;
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -712,14 +864,27 @@
       // 設定更新時間
       document.getElementById('update-time-text').innerText = '資料更新: ' + data.updateTime;
       
-      // 分組 ETF 與基金
+      // 1. 計算所有主動式 ETF 的綜合持股排行
+      const totalHoldings = calculateTotalHoldings(data.results);
+      const totalTarget = {
+        symbol: "TOTAL",
+        name: "🏆 主動式 ETF 綜合排行",
+        holdings: totalHoldings,
+        compare: null
+      };
+      
+      // 2. 將綜合排行塞入結果列表的最前面
+      data.results.unshift(totalTarget);
+      
+      // 3. 分組 ETF 與基金
       const etfs = [];
       const funds = [];
       
       data.results.forEach(res => {
-        // 判斷是否為基金：基金 symbol 通常為英文字開頭，如 ACPS10；ETF 通常為純數字或帶 A，如 00403A
-        if (res.symbol.startsWith('AC')) {
-          funds.append ? funds.push(res) : funds.push(res);
+        if (res.symbol === 'TOTAL') {
+          etfs.push(res); // 綜合排行歸類在 ETF 最前面
+        } else if (res.symbol.startsWith('AC')) {
+          funds.push(res);
         } else {
           etfs.push(res);
         }
@@ -729,10 +894,66 @@
       renderSidebar(etfs, 'etf-list');
       renderSidebar(funds, 'fund-list');
       
-      // 預設選取第一個標的
+      // 預設選取第一個標的 (即主頁綜合排行)
       if (data.results.length > 0) {
         selectTarget(data.results[0].symbol);
       }
+    }
+
+    // 計算所有主動式 ETF 的綜合持股排行
+    function calculateTotalHoldings(results) {
+      // 篩選出主動型 ETF (非基金且名稱含「主動」)
+      const activeEtfs = results.filter(res => {
+        if (res.symbol.startsWith('AC')) return false;
+        if (res.symbol === 'TOTAL') return false;
+        return res.name.includes('主動');
+      });
+      
+      if (activeEtfs.length === 0) return [];
+      
+      const stockMap = {};
+      
+      // 累計各成分股的權重與出現次數
+      activeEtfs.forEach(etf => {
+        if (!etf.holdings) return;
+        etf.holdings.forEach(h => {
+          const code = h.stock_code ? h.stock_code.trim() : "";
+          const name = h.stock_name ? h.stock_name.trim() : "";
+          if (!name) return;
+          
+          // 使用代碼或名稱作為 key，避免重複
+          const key = code ? code : name;
+          
+          if (!stockMap[key]) {
+            stockMap[key] = {
+              stock_code: code,
+              stock_name: name,
+              totalWeight: 0.0,
+              count: 0
+            };
+          }
+          stockMap[key].totalWeight += h.weight;
+          stockMap[key].count += 1;
+        });
+      });
+      
+      const numEtfs = activeEtfs.length;
+      
+      // 轉成陣列並計算等權重平均佔比
+      const list = Object.values(stockMap).map(item => {
+        return {
+          stock_code: item.stock_code,
+          stock_name: item.stock_name,
+          weight: item.totalWeight / numEtfs, // 所有主動 ETF 的平均佔比
+          count: item.count // 被選入的檔數
+        };
+      });
+      
+      // 依佔比由大到小排序
+      list.sort((a, b) => b.weight - a.weight);
+      
+      // 取前 20 大成分股
+      return list.slice(0, 20);
     }
 
     // 渲染側邊欄清單
@@ -778,22 +999,35 @@
       // 更新英雄大卡片
       document.getElementById('target-name').innerText = target.name;
       document.getElementById('target-symbol').innerText = target.symbol;
-      document.getElementById('target-type').innerText = symbol.startsWith('AC') ? '國內一般共同基金' : '主動/被動型 ETF';
+      
+      // 控制變動區與類型標籤顯示
+      const changesView = document.getElementById('changes-view');
+      if (symbol === 'TOTAL') {
+        document.getElementById('target-type').innerText = '主頁統計數據';
+        changesView.style.display = 'none'; // 隱藏變動看板
+      } else {
+        document.getElementById('target-type').innerText = symbol.startsWith('AC') ? '國內一般共同基金' : '主動/被動型 ETF';
+        changesView.style.display = 'grid'; // 顯示變動看板
+      }
       
       const compare = target.compare;
       const compareBaseDate = document.getElementById('compare-base-date');
       
-      if (compare) {
+      if (symbol === 'TOTAL') {
+        compareBaseDate.innerText = '綜合多檔主動型 ETF 統計';
+      } else if (compare) {
         compareBaseDate.innerText = compare.prev_date;
       } else {
         compareBaseDate.innerText = '首次抓取 (無歷史比對資料)';
       }
       
-      // 渲染換股變動看板
-      renderChanges(compare);
+      // 渲染換股變動看板 (非 TOTAL 頁面時渲染)
+      if (symbol !== 'TOTAL') {
+        renderChanges(compare);
+      }
       
-      // 渲染成分股表格
-      renderTable(target.holdings);
+      // 渲染成分股表格 (傳入 isTotalPage flag)
+      renderTable(target.holdings, symbol === 'TOTAL');
       
       // 渲染成分股圓餅圖
       renderChart(target.holdings);
@@ -898,19 +1132,42 @@
     }
 
     // 渲染成分股表格
-    function renderTable(holdings) {
+    function renderTable(holdings, isTotalPage) {
       const tbody = document.getElementById('holdings-table-body');
       tbody.innerHTML = '';
+      
+      // 動態更新表格標頭
+      const tableHeaders = document.querySelectorAll('#holdings-table th');
+      const ratioHeader = tableHeaders[tableHeaders.length - 1];
+      if (isTotalPage) {
+        ratioHeader.innerText = '平均持股比例 (納入檔數)';
+      } else {
+        ratioHeader.innerText = '持股比例';
+      }
       
       holdings.forEach(h => {
         const tr = document.createElement('tr');
         const codeDisplay = h.stock_code ? h.stock_code : '--';
         
+        let ratioHtml = '';
+        if (isTotalPage) {
+          ratioHtml = `
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem;">
+              <span style="font-family: var(--font-outfit); font-weight: 600">${h.weight.toFixed(2)}%</span>
+              <span style="font-size: 0.7rem; color: #a5b4fc; background: rgba(99,102,241,0.15); padding: 0.05rem 0.35rem; border-radius: 4px;">納入 ${h.count} 檔</span>
+            </div>
+          `;
+        } else {
+          ratioHtml = `<span style="font-family: var(--font-outfit); font-weight: 600">${h.weight.toFixed(2)}%</span>`;
+        }
+        
         tr.innerHTML = `
           <td style="font-family: var(--font-outfit); font-size: 0.8rem; color: var(--text-muted); font-weight: 500">${codeDisplay}</td>
           <td style="font-weight: 600">${h.stock_name}</td>
           <td style="text-align: right;">
-            <span style="font-family: var(--font-outfit); font-weight: 600">${h.weight.toFixed(2)}%</span>
+            <div style="display: inline-flex; align-items: center; justify-content: flex-end; min-height: 2rem;">
+              ${ratioHtml}
+            </div>
             <div class="pct-bar-bg">
               <div class="pct-bar-fill" style="width: ${h.weight}%"></div>
             </div>
