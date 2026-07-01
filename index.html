@@ -632,98 +632,110 @@
       }
 
       .dashboard-container {
-        flex-direction: column;
+        flex-direction: column-reverse; /* 內容在上，選單在下 */
         padding: 0.75rem;
         gap: 0.75rem;
       }
 
-      /* 側邊欄改為頂部水平滾動導覽列 */
+      /* 側邊欄：手機下恢復為縱向選單卡片 */
       .sidebar {
         width: 100%;
-        flex-direction: row;
-        gap: 0.5rem;
-        overflow-x: auto;
-        white-space: nowrap;
-        padding: 0.25rem 0.5rem 0.5rem 0.5rem;
-        position: sticky;
-        top: 0; /* 黏在最頂部 */
-        z-index: 100;
-        background: #0f172a;
+        flex-direction: column;
+        gap: 0.75rem;
+        overflow-x: visible;
+        white-space: normal;
+        position: static;
+        background: transparent;
+        border-bottom: none;
         margin: 0;
-        border-bottom: 1px solid var(--card-border);
-        /* 隱藏捲軸 */
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      
-      .sidebar::-webkit-scrollbar {
-        display: none;
+        padding: 0;
       }
 
       .sidebar-card {
-        display: contents; /* 讓內層的 list-container 直接排在 flex 中 */
+        display: block; /* 恢復卡片 */
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 1.25rem;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       }
 
       .sidebar-section-title {
-        display: none;
+        display: flex; /* 恢復分組標題 */
+        font-family: var(--font-outfit);
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 0.85rem;
+        align-items: center;
+        gap: 0.5rem;
+        border-left: 3px solid var(--color-primary);
+        padding-left: 0.5rem;
       }
 
       .list-container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column; /* 恢復縱向排列 */
         gap: 0.5rem;
-        max-height: none;
-        overflow-y: visible;
-        padding: 0;
+        max-height: 280px; /* 限制最大高度防止頁面過長，並允許內部滾動 */
+        overflow-y: auto;
+        padding: 0 0.25rem 0 0;
       }
 
       .list-item {
-        padding: 0.45rem 0.85rem;
-        border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        flex-shrink: 0;
-        display: inline-flex;
+        padding: 0.65rem 0.85rem;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: 0.35rem;
+        width: 100%;
+        flex-shrink: 0;
       }
 
       .list-item .item-meta {
-        flex-direction: row;
-        align-items: center;
-        gap: 0.35rem;
+        display: flex;
+        flex-direction: column; /* 上下排：名稱在上，代號在下 */
+        align-items: flex-start;
+        gap: 0.15rem;
+        width: 100%;
       }
 
       .list-item .item-name {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         font-weight: 500;
+        white-space: normal; /* 允許文字折行 */
       }
 
       .list-item .item-symbol {
-        font-size: 0.65rem;
-        background: rgba(255, 255, 255, 0.08);
-        padding: 0.05rem 0.25rem;
-        border-radius: 3px;
+        font-size: 0.7rem;
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
         color: var(--text-muted);
       }
 
       .list-item.active {
-        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-        border-color: transparent;
+        background: rgba(99, 102, 241, 0.15);
+        border-color: var(--color-primary);
         box-shadow: 0 0 10px var(--color-primary-glow);
       }
 
       .list-item.active .item-symbol {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff;
+        background: transparent;
+        color: #a5b4fc;
       }
 
       .list-item .item-badge {
         position: static;
         transform: none;
-        margin-left: 0.25rem;
+        margin-left: 0.5rem;
         font-size: 0.6rem;
         padding: 0.1rem 0.3rem;
+        flex-shrink: 0;
       }
 
       /* 主內容區 */
@@ -767,7 +779,6 @@
         color: var(--text-main);
       }
 
-      /* 手機上將 TOTAL 這個 badge 在卡片內隱藏，因為上面的 Tab 已經有 TOTAL 標籤 */
       .hero-card #target-symbol {
         display: none;
       }
@@ -1145,6 +1156,11 @@
       
       // 渲染成分股圓餅圖
       renderChart(target.holdings);
+
+      // 如果是手機版，點選標的後自動平滑滾動回頂部
+      if (window.innerWidth <= 768) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
     // 渲染變動看板
