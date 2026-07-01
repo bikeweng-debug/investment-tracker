@@ -545,19 +545,90 @@
       box-shadow: 0 0 22px rgba(99, 102, 241, 0.5);
     }
 
+    /* 自訂圖例樣式 (通用，預設在寬螢幕隱藏) */
+    .custom-legend-container {
+      display: none;
+      width: 100%;
+      margin-top: 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .custom-legend-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+
+    .legend-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .legend-color-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .legend-name {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .legend-ratio {
+      font-family: var(--font-outfit);
+      font-weight: 600;
+      color: #a5b4fc;
+    }
+
     /* 手機版 (RWD) 以手機瀏覽為主的配置 */
     @media (max-width: 768px) {
       header {
         position: static; /* 手機上 header 可以隨頁面捲走 */
-        padding: 1rem;
-        flex-direction: column;
-        gap: 0.5rem;
+        padding: 0.65rem 1rem;
+        flex-direction: row; /* 水平排列 */
+        justify-content: space-between;
         align-items: center;
-        text-align: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 0.35rem;
+      }
+
+      .logo-icon svg {
+        width: 1rem;
+        height: 1rem;
       }
 
       .header-title {
-        font-size: 1.15rem;
+        font-size: 1.05rem; /* 小巧避免換行 */
+      }
+
+      .header-info {
+        font-size: 0.75rem;
+      }
+
+      .update-badge {
+        background: transparent;
+        border: none;
+        padding: 0;
+        color: var(--text-muted);
+        gap: 0.35rem;
+      }
+
+      .update-dot {
+        width: 0.35rem;
+        height: 0.35rem;
       }
 
       .dashboard-container {
@@ -662,13 +733,50 @@
 
       .hero-card {
         padding: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row; /* 水平排列，左右各一邊 */
+        justify-content: space-between;
+        align-items: center;
         gap: 0.5rem;
       }
 
+      .hero-card div:first-child {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        flex: 1;
+        min-width: 0;
+      }
+
       .hero-card h2 {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .hero-subtitle {
+        font-size: 0.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-muted);
+      }
+
+      .hero-subtitle strong {
+        color: var(--text-main);
+      }
+
+      /* 手機上將 TOTAL 這個 badge 在卡片內隱藏，因為上面的 Tab 已經有 TOTAL 標籤 */
+      .hero-card #target-symbol {
+        display: none;
+      }
+
+      .hero-card .hero-tag:last-child {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        margin: 0;
+        flex-shrink: 0;
       }
 
       .changes-grid {
@@ -687,7 +795,11 @@
       }
       
       .chart-container {
-        height: 240px;
+        height: 180px; /* 稍微縮小，為 HTML 圖例讓路 */
+      }
+
+      .custom-legend-container {
+        display: flex; /* 手機顯示自訂圖例 */
       }
 
       /* 表格在手機上的調整 */
@@ -810,10 +922,12 @@
       <div class="details-row">
         <!-- 左：圓餅圖 -->
         <div class="chart-card">
-          <h4 class="sidebar-section-title" style="margin-bottom: 1.5rem; align-self: flex-start;">前十大持股比例</h4>
+          <h4 class="sidebar-section-title" style="margin-bottom: 1.5rem; align-self: flex-start;">前五大持股比例</h4>
           <div class="chart-container">
             <canvas id="holdingsChart"></canvas>
           </div>
+          <!-- 自訂圖例 (供手機版渲染) -->
+          <div id="custom-chart-legend" class="custom-legend-container"></div>
         </div>
 
         <!-- 右：表格明細 -->
@@ -1014,7 +1128,7 @@
       const compareBaseDate = document.getElementById('compare-base-date');
       
       if (symbol === 'TOTAL') {
-        compareBaseDate.innerText = '綜合多檔主動型 ETF 統計';
+        compareBaseDate.innerText = '綜合多檔統計';
       } else if (compare) {
         compareBaseDate.innerText = compare.prev_date;
       } else {
@@ -1201,6 +1315,15 @@
         'rgba(255, 255, 255, 0.08)' // Muted White
       ];
 
+      const isMobile = window.innerWidth <= 768;
+
+      // 如果是手機版，渲染自訂 HTML 圖例
+      if (isMobile) {
+        renderCustomLegend(labels, data, chartColors);
+      } else {
+        document.getElementById('custom-chart-legend').innerHTML = ''; // 桌面版清除自訂圖例
+      }
+
       if (chartInstance) {
         chartInstance.destroy();
       }
@@ -1221,7 +1344,7 @@
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: true,
+              display: !isMobile, // 手機版隱藏 Chart.js 預設圖例
               position: 'bottom',
               labels: {
                 color: '#94a3b8',
@@ -1251,6 +1374,30 @@
           },
           cutout: '75%'
         }
+      });
+    }
+
+    // 渲染手機端專用自訂 HTML 圖例
+    function renderCustomLegend(labels, data, colors) {
+      const container = document.getElementById('custom-chart-legend');
+      container.innerHTML = '';
+      
+      labels.forEach((label, index) => {
+        const value = data[index];
+        const color = colors[index];
+        
+        const item = document.createElement('div');
+        item.className = 'custom-legend-item';
+        
+        item.innerHTML = `
+          <div class="legend-left">
+            <div class="legend-color-dot" style="background-color: ${color}; box-shadow: 0 0 8px ${color}"></div>
+            <span class="legend-name">${label}</span>
+          </div>
+          <span class="legend-ratio">${value.toFixed(2)}%</span>
+        `;
+        
+        container.appendChild(item);
       });
     }
 
