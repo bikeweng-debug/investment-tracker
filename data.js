@@ -1,6 +1,6 @@
 window.dashboardData = {
-  "updateTime": "2026-07-10 15:18:47",
-  "date": "2026-07-10",
+  "updateTime": "2026-07-11 14:09:01",
+  "date": "2026-07-11",
   "results": [
     {
       "symbol": "00403A.TW",
@@ -58,7 +58,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -122,7 +122,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -186,7 +186,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -250,7 +250,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -314,7 +314,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -378,7 +378,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -442,7 +442,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -506,7 +506,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -570,7 +570,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -634,7 +634,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -698,7 +698,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -762,7 +762,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -826,7 +826,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -890,7 +890,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -954,7 +954,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -1018,7 +1018,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-07-09",
+        "prev_date": "2026-07-10",
         "has_changes": false,
         "added": [],
         "removed": [],
