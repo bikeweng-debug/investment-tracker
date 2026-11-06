@@ -1,6 +1,6 @@
 window.dashboardData = {
-  "updateTime": "2026-11-05 20:15:57",
-  "date": "2026-11-05",
+  "updateTime": "2026-11-06 19:40:55",
+  "date": "2026-11-06",
   "results": [
     {
       "symbol": "00403A.TW",
@@ -9,121 +9,129 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台積電",
-          "weight": 15.84
-        },
-        {
-          "stock_code": "3017",
-          "stock_name": "奇鋐",
-          "weight": 5.37
-        },
-        {
-          "stock_code": "3653",
-          "stock_name": "健策",
-          "weight": 5.28
+          "weight": 16.08
         },
         {
           "stock_code": "2454",
           "stock_name": "聯發科",
-          "weight": 5.11
+          "weight": 5.42
+        },
+        {
+          "stock_code": "3017",
+          "stock_name": "奇鋐",
+          "weight": 5.09
+        },
+        {
+          "stock_code": "3653",
+          "stock_name": "健策",
+          "weight": 5.01
         },
         {
           "stock_code": "3037",
           "stock_name": "欣興",
-          "weight": 5.09
+          "weight": 4.87
         },
         {
           "stock_code": "2383",
           "stock_name": "台光電",
-          "weight": 4.35
+          "weight": 4.26
         },
         {
           "stock_code": "3443",
           "stock_name": "創意",
-          "weight": 4.02
+          "weight": 4.1
         },
         {
           "stock_code": "2327",
           "stock_name": "國巨*",
-          "weight": 3.15
+          "weight": 3.06
         },
         {
           "stock_code": "6223",
           "stock_name": "旺矽",
-          "weight": 3.06
+          "weight": 2.98
         },
         {
-          "stock_code": "3189",
-          "stock_name": "景碩",
-          "weight": 2.91
+          "stock_code": "1303",
+          "stock_name": "南亞",
+          "weight": 2.85
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
-        "added": [],
-        "removed": [],
+        "added": [
+          {
+            "name": "南亞",
+            "code": "1303",
+            "weight": 2.85,
+            "diff": 2.85
+          }
+        ],
+        "removed": [
+          {
+            "name": "景碩",
+            "code": "3189",
+            "weight": 2.91,
+            "diff": -2.91
+          }
+        ],
         "increased": [
           {
             "name": "台積電",
             "code": "2330",
-            "weight": 15.84,
-            "diff": 0.8499999999999996
+            "weight": 16.08,
+            "diff": 0.23999999999999844
           },
           {
             "name": "聯發科",
             "code": "2454",
-            "weight": 5.11,
-            "diff": 0.0600000000000005
+            "weight": 5.42,
+            "diff": 0.3099999999999996
+          },
+          {
+            "name": "創意",
+            "code": "3443",
+            "weight": 4.1,
+            "diff": 0.08000000000000007
           }
         ],
         "decreased": [
           {
             "name": "奇鋐",
             "code": "3017",
-            "weight": 5.37,
-            "diff": -0.2400000000000002
-          },
-          {
-            "name": "健策",
-            "code": "3653",
-            "weight": 5.28,
-            "diff": -0.2999999999999998
-          },
-          {
-            "name": "欣興",
-            "code": "3037",
             "weight": 5.09,
             "diff": -0.28000000000000025
           },
           {
-            "name": "台光電",
-            "code": "2383",
-            "weight": 4.35,
-            "diff": -0.2400000000000002
+            "name": "健策",
+            "code": "3653",
+            "weight": 5.01,
+            "diff": -0.27000000000000046
           },
           {
-            "name": "創意",
-            "code": "3443",
-            "weight": 4.02,
-            "diff": -0.22000000000000064
+            "name": "欣興",
+            "code": "3037",
+            "weight": 4.87,
+            "diff": -0.21999999999999975
+          },
+          {
+            "name": "台光電",
+            "code": "2383",
+            "weight": 4.26,
+            "diff": -0.08999999999999986
           },
           {
             "name": "國巨*",
             "code": "2327",
-            "weight": 3.15,
-            "diff": -0.16999999999999993
+            "weight": 3.06,
+            "diff": -0.08999999999999986
           },
           {
             "name": "旺矽",
             "code": "6223",
-            "weight": 3.06,
-            "diff": -0.16999999999999993
-          },
-          {
-            "name": "景碩",
-            "code": "3189",
-            "weight": 2.91,
-            "diff": -0.1599999999999997
+            "weight": 2.98,
+            "diff": -0.08000000000000007
           }
         ]
       }
@@ -135,12 +143,12 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台灣積體電路製造",
-          "weight": 10.29
+          "weight": 10.35
         },
         {
           "stock_code": "2454",
           "stock_name": "聯發科技",
-          "weight": 5.26
+          "weight": 5.44
         },
         {
           "stock_code": "2059",
@@ -148,43 +156,43 @@ window.dashboardData = {
           "weight": 3.85
         },
         {
-          "stock_code": "2383",
-          "stock_name": "台光電子材料",
-          "weight": 3.6
-        },
-        {
           "stock_code": "2317",
           "stock_name": "鴻海精密工業",
-          "weight": 3.52
+          "weight": 3.55
+        },
+        {
+          "stock_code": "2383",
+          "stock_name": "台光電子材料",
+          "weight": 3.54
         },
         {
           "stock_code": "1303",
           "stock_name": "南亞塑膠工業",
-          "weight": 3.22
-        },
-        {
-          "stock_code": "3653",
-          "stock_name": "健策精密工業",
-          "weight": 3.19
+          "weight": 3.27
         },
         {
           "stock_code": "202611TX",
           "stock_name": "台灣證交所加權股價指數",
-          "weight": 3.07
+          "weight": 3.06
+        },
+        {
+          "stock_code": "3653",
+          "stock_name": "健策精密工業",
+          "weight": 3.03
         },
         {
           "stock_code": "3037",
           "stock_name": "欣興電子",
-          "weight": 3.05
+          "weight": 2.93
         },
         {
           "stock_code": "2308",
           "stock_name": "台達電子工業",
-          "weight": 2.79
+          "weight": 2.75
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
         "added": [],
         "removed": [],
@@ -192,64 +200,58 @@ window.dashboardData = {
           {
             "name": "台灣積體電路製造",
             "code": "2330",
-            "weight": 10.29,
-            "diff": 0.41999999999999993
+            "weight": 10.35,
+            "diff": 0.0600000000000005
+          },
+          {
+            "name": "聯發科技",
+            "code": "2454",
+            "weight": 5.44,
+            "diff": 0.1800000000000006
           },
           {
             "name": "鴻海精密工業",
             "code": "2317",
-            "weight": 3.52,
-            "diff": 0.10999999999999988
-          },
-          {
-            "name": "台灣證交所加權股價指數",
-            "code": "202611TX",
-            "weight": 3.07,
-            "diff": 0.06000000000000005
-          }
-        ],
-        "decreased": [
-          {
-            "name": "聯發科技",
-            "code": "2454",
-            "weight": 5.26,
-            "diff": -0.10000000000000053
-          },
-          {
-            "name": "川湖科技",
-            "code": "2059",
-            "weight": 3.85,
-            "diff": -0.08999999999999986
-          },
-          {
-            "name": "台光電子材料",
-            "code": "2383",
-            "weight": 3.6,
-            "diff": -0.19999999999999973
+            "weight": 3.55,
+            "diff": 0.029999999999999805
           },
           {
             "name": "南亞塑膠工業",
             "code": "1303",
-            "weight": 3.22,
-            "diff": -0.16999999999999993
+            "weight": 3.27,
+            "diff": 0.04999999999999982
+          }
+        ],
+        "decreased": [
+          {
+            "name": "台光電子材料",
+            "code": "2383",
+            "weight": 3.54,
+            "diff": -0.06000000000000005
+          },
+          {
+            "name": "台灣證交所加權股價指數",
+            "code": "202611TX",
+            "weight": 3.06,
+            "diff": -0.009999999999999787
           },
           {
             "name": "健策精密工業",
             "code": "3653",
-            "weight": 3.19,
-            "diff": -0.18000000000000016
+            "weight": 3.03,
+            "diff": -0.16000000000000014
           },
           {
             "name": "欣興電子",
             "code": "3037",
-            "weight": 3.05,
-            "diff": -0.17000000000000037
+            "weight": 2.93,
+            "diff": -0.11999999999999966
           },
           {
             "name": "台達電子工業",
             "code": "2308",
-            "weight": 2.79,
-            "diff": -0.06999999999999984
+            "weight": 2.75,
+            "diff": -0.040000000000000036
           }
         ]
       }
@@ -261,121 +263,129 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台積電",
-          "weight": 14.27
+          "weight": 15.17
         },
         {
           "stock_code": "2454",
           "stock_name": "聯發科",
-          "weight": 7.89
+          "weight": 8.3
         },
         {
           "stock_code": "2383",
           "stock_name": "台光電",
-          "weight": 7.21
+          "weight": 7.09
         },
         {
           "stock_code": "3017",
           "stock_name": "奇鋐",
-          "weight": 6.93
+          "weight": 6.59
         },
         {
           "stock_code": "3037",
           "stock_name": "欣興",
-          "weight": 6.42
+          "weight": 6.15
         },
         {
           "stock_code": "3653",
           "stock_name": "健策",
-          "weight": 5.92
+          "weight": 5.67
         },
         {
           "stock_code": "3711",
           "stock_name": "日月光投控",
-          "weight": 3.93
+          "weight": 3.82
         },
         {
           "stock_code": "2327",
           "stock_name": "國巨*",
-          "weight": 3.86
+          "weight": 3.77
         },
         {
           "stock_code": "6223",
           "stock_name": "旺矽",
-          "weight": 3.79
+          "weight": 3.7
         },
         {
-          "stock_code": "8046",
-          "stock_name": "南電",
-          "weight": 3.55
+          "stock_code": "2345",
+          "stock_name": "智邦",
+          "weight": 3.47
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
-        "added": [],
-        "removed": [],
-        "increased": [
+        "added": [
           {
-            "name": "台積電",
-            "code": "2330",
-            "weight": 14.27,
-            "diff": 0.9100000000000001
+            "name": "智邦",
+            "code": "2345",
+            "weight": 3.47,
+            "diff": 3.47
           }
         ],
-        "decreased": [
-          {
-            "name": "聯發科",
-            "code": "2454",
-            "weight": 7.89,
-            "diff": -0.1800000000000006
-          },
-          {
-            "name": "台光電",
-            "code": "2383",
-            "weight": 7.21,
-            "diff": -0.41999999999999993
-          },
-          {
-            "name": "奇鋐",
-            "code": "3017",
-            "weight": 6.93,
-            "diff": -0.33000000000000007
-          },
-          {
-            "name": "欣興",
-            "code": "3037",
-            "weight": 6.42,
-            "diff": -0.3600000000000003
-          },
-          {
-            "name": "健策",
-            "code": "3653",
-            "weight": 5.92,
-            "diff": -0.34999999999999964
-          },
-          {
-            "name": "日月光投控",
-            "code": "3711",
-            "weight": 3.93,
-            "diff": -0.16999999999999948
-          },
-          {
-            "name": "國巨*",
-            "code": "2327",
-            "weight": 3.86,
-            "diff": -0.22999999999999998
-          },
-          {
-            "name": "旺矽",
-            "code": "6223",
-            "weight": 3.79,
-            "diff": -0.21999999999999975
-          },
+        "removed": [
           {
             "name": "南電",
             "code": "8046",
             "weight": 3.55,
-            "diff": -0.20999999999999996
+            "diff": -3.55
+          }
+        ],
+        "increased": [
+          {
+            "name": "台積電",
+            "code": "2330",
+            "weight": 15.17,
+            "diff": 0.9000000000000004
+          },
+          {
+            "name": "聯發科",
+            "code": "2454",
+            "weight": 8.3,
+            "diff": 0.41000000000000103
+          }
+        ],
+        "decreased": [
+          {
+            "name": "台光電",
+            "code": "2383",
+            "weight": 7.09,
+            "diff": -0.1200000000000001
+          },
+          {
+            "name": "奇鋐",
+            "code": "3017",
+            "weight": 6.59,
+            "diff": -0.33999999999999986
+          },
+          {
+            "name": "欣興",
+            "code": "3037",
+            "weight": 6.15,
+            "diff": -0.2699999999999996
+          },
+          {
+            "name": "健策",
+            "code": "3653",
+            "weight": 5.67,
+            "diff": -0.25
+          },
+          {
+            "name": "日月光投控",
+            "code": "3711",
+            "weight": 3.82,
+            "diff": -0.11000000000000032
+          },
+          {
+            "name": "國巨*",
+            "code": "2327",
+            "weight": 3.77,
+            "diff": -0.08999999999999986
+          },
+          {
+            "name": "旺矽",
+            "code": "6223",
+            "weight": 3.7,
+            "diff": -0.08999999999999986
           }
         ]
       }
@@ -387,121 +397,121 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台積電",
-          "weight": 8.8088
-        },
-        {
-          "stock_code": "3105",
-          "stock_name": "穩懋",
-          "weight": 7.781
+          "weight": 8.8026
         },
         {
           "stock_code": "2454",
           "stock_name": "聯發科",
-          "weight": 7.5432
+          "weight": 7.7486
+        },
+        {
+          "stock_code": "3105",
+          "stock_name": "穩懋",
+          "weight": 7.3439
         },
         {
           "stock_code": "6139",
           "stock_name": "亞翔",
-          "weight": 5.3186
+          "weight": 5.3301
         },
         {
           "stock_code": "6531",
           "stock_name": "愛普*",
-          "weight": 3.6426
+          "weight": 3.5833
         },
         {
           "stock_code": "3491",
           "stock_name": "昇達科",
-          "weight": 3.4031
-        },
-        {
-          "stock_code": "2360",
-          "stock_name": "致茂",
-          "weight": 3.1812
+          "weight": 3.2807
         },
         {
           "stock_code": "2383",
           "stock_name": "台光電",
-          "weight": 3.1765
+          "weight": 3.1421
+        },
+        {
+          "stock_code": "2360",
+          "stock_name": "致茂",
+          "weight": 3.0507
         },
         {
           "stock_code": "4958",
           "stock_name": "臻鼎-KY",
-          "weight": 3.041
+          "weight": 3.0184
         },
         {
           "stock_code": "3008",
           "stock_name": "大立光",
-          "weight": 2.8644
+          "weight": 3.0077
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
         "added": [],
         "removed": [],
         "increased": [
           {
-            "name": "台積電",
-            "code": "2330",
-            "weight": 8.8088,
-            "diff": 0.5000999999999998
-          },
-          {
-            "name": "昇達科",
-            "code": "3491",
-            "weight": 3.4031,
-            "diff": 0.10029999999999983
-          }
-        ],
-        "decreased": [
-          {
-            "name": "穩懋",
-            "code": "3105",
-            "weight": 7.781,
-            "diff": -0.2997000000000005
-          },
-          {
             "name": "聯發科",
             "code": "2454",
-            "weight": 7.5432,
-            "diff": -0.028500000000000192
+            "weight": 7.7486,
+            "diff": 0.20540000000000003
           },
           {
             "name": "亞翔",
             "code": "6139",
-            "weight": 5.3186,
-            "diff": -0.02200000000000024
-          },
-          {
-            "name": "愛普*",
-            "code": "6531",
-            "weight": 3.6426,
-            "diff": -0.13590000000000035
-          },
-          {
-            "name": "致茂",
-            "code": "2360",
-            "weight": 3.1812,
-            "diff": -0.0935999999999999
-          },
-          {
-            "name": "台光電",
-            "code": "2383",
-            "weight": 3.1765,
-            "diff": -0.12270000000000003
-          },
-          {
-            "name": "臻鼎-KY",
-            "code": "4958",
-            "weight": 3.041,
-            "diff": -0.08340000000000014
+            "weight": 5.3301,
+            "diff": 0.011499999999999844
           },
           {
             "name": "大立光",
             "code": "3008",
-            "weight": 2.8644,
-            "diff": -0.10050000000000026
+            "weight": 3.0077,
+            "diff": 0.14329999999999998
+          }
+        ],
+        "decreased": [
+          {
+            "name": "台積電",
+            "code": "2330",
+            "weight": 8.8026,
+            "diff": -0.006199999999999761
+          },
+          {
+            "name": "穩懋",
+            "code": "3105",
+            "weight": 7.3439,
+            "diff": -0.43710000000000004
+          },
+          {
+            "name": "愛普*",
+            "code": "6531",
+            "weight": 3.5833,
+            "diff": -0.05929999999999991
+          },
+          {
+            "name": "昇達科",
+            "code": "3491",
+            "weight": 3.2807,
+            "diff": -0.12239999999999984
+          },
+          {
+            "name": "台光電",
+            "code": "2383",
+            "weight": 3.1421,
+            "diff": -0.034399999999999764
+          },
+          {
+            "name": "致茂",
+            "code": "2360",
+            "weight": 3.0507,
+            "diff": -0.13050000000000006
+          },
+          {
+            "name": "臻鼎-KY",
+            "code": "4958",
+            "weight": 3.0184,
+            "diff": -0.02259999999999973
           }
         ]
       }
@@ -513,56 +523,56 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台積電",
-          "weight": 7.0754
-        },
-        {
-          "stock_code": "3017",
-          "stock_name": "奇鋐",
-          "weight": 5.9887
-        },
-        {
-          "stock_code": "3665",
-          "stock_name": "貿聯-KY",
-          "weight": 5.8916
-        },
-        {
-          "stock_code": "8996",
-          "stock_name": "高力",
-          "weight": 5.7
+          "weight": 7.205
         },
         {
           "stock_code": "3037",
           "stock_name": "欣興",
-          "weight": 5.4392
+          "weight": 5.9701
         },
         {
           "stock_code": "2383",
           "stock_name": "台光電",
-          "weight": 5.2488
+          "weight": 5.7938
+        },
+        {
+          "stock_code": "3017",
+          "stock_name": "奇鋐",
+          "weight": 5.7622
+        },
+        {
+          "stock_code": "3665",
+          "stock_name": "貿聯-KY",
+          "weight": 5.6737
+        },
+        {
+          "stock_code": "8996",
+          "stock_name": "高力",
+          "weight": 5.5705
         },
         {
           "stock_code": "2345",
           "stock_name": "智邦",
-          "weight": 4.7403
+          "weight": 4.6975
         },
         {
           "stock_code": "2059",
           "stock_name": "川湖",
-          "weight": 4.4184
+          "weight": 4.4666
         },
         {
           "stock_code": "1815",
           "stock_name": "富喬",
-          "weight": 3.8873
+          "weight": 4.0164
         },
         {
           "stock_code": "3008",
           "stock_name": "大立光",
-          "weight": 3.7051
+          "weight": 3.9192
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
         "added": [],
         "removed": [],
@@ -570,64 +580,64 @@ window.dashboardData = {
           {
             "name": "台積電",
             "code": "2330",
-            "weight": 7.0754,
-            "diff": 0.4046000000000003
+            "weight": 7.205,
+            "diff": 0.12959999999999994
           },
           {
-            "name": "貿聯-KY",
-            "code": "3665",
-            "weight": 5.8916,
-            "diff": 0.011600000000000499
+            "name": "欣興",
+            "code": "3037",
+            "weight": 5.9701,
+            "diff": 0.5309000000000008
+          },
+          {
+            "name": "台光電",
+            "code": "2383",
+            "weight": 5.7938,
+            "diff": 0.5449999999999999
+          },
+          {
+            "name": "川湖",
+            "code": "2059",
+            "weight": 4.4666,
+            "diff": 0.048199999999999577
+          },
+          {
+            "name": "富喬",
+            "code": "1815",
+            "weight": 4.0164,
+            "diff": 0.12909999999999977
+          },
+          {
+            "name": "大立光",
+            "code": "3008",
+            "weight": 3.9192,
+            "diff": 0.21410000000000018
           }
         ],
         "decreased": [
           {
             "name": "奇鋐",
             "code": "3017",
-            "weight": 5.9887,
-            "diff": -0.16389999999999993
+            "weight": 5.7622,
+            "diff": -0.2264999999999997
+          },
+          {
+            "name": "貿聯-KY",
+            "code": "3665",
+            "weight": 5.6737,
+            "diff": -0.2179000000000002
           },
           {
             "name": "高力",
             "code": "8996",
-            "weight": 5.7,
-            "diff": -0.20449999999999946
-          },
-          {
-            "name": "欣興",
-            "code": "3037",
-            "weight": 5.4392,
-            "diff": -0.20260000000000034
-          },
-          {
-            "name": "台光電",
-            "code": "2383",
-            "weight": 5.2488,
-            "diff": -0.20029999999999948
+            "weight": 5.5705,
+            "diff": -0.12950000000000017
           },
           {
             "name": "智邦",
             "code": "2345",
-            "weight": 4.7403,
-            "diff": -0.010299999999999976
-          },
-          {
-            "name": "川湖",
-            "code": "2059",
-            "weight": 4.4184,
-            "diff": -0.022800000000000153
-          },
-          {
-            "name": "富喬",
-            "code": "1815",
-            "weight": 3.8873,
-            "diff": -0.1488999999999998
-          },
-          {
-            "name": "大立光",
-            "code": "3008",
-            "weight": 3.7051,
-            "diff": -0.1283000000000003
+            "weight": 4.6975,
+            "diff": -0.042800000000000615
           }
         ]
       }
@@ -639,12 +649,12 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台積電",
-          "weight": 41.36
+          "weight": 41.2
         },
         {
           "stock_code": "2454",
           "stock_name": "聯發科",
-          "weight": 5.08
+          "weight": 5.27
         },
         {
           "stock_code": "2887",
@@ -654,114 +664,100 @@ window.dashboardData = {
         {
           "stock_code": "202611TX",
           "stock_name": "臺股期貨",
-          "weight": 3.07
+          "weight": 2.98
         },
         {
           "stock_code": "2885",
           "stock_name": "元大金",
-          "weight": 2.94
+          "weight": 2.96
         },
         {
           "stock_code": "2317",
           "stock_name": "鴻海",
-          "weight": 2.88
+          "weight": 2.86
         },
         {
           "stock_code": "2412",
           "stock_name": "中華電",
-          "weight": 2.64
+          "weight": 2.79
         },
         {
           "stock_code": "2884",
           "stock_name": "玉山金",
-          "weight": 2.44
+          "weight": 2.49
         },
         {
           "stock_code": "2308",
           "stock_name": "台達電",
-          "weight": 2.35
+          "weight": 2.29
         },
         {
           "stock_code": "2886",
           "stock_name": "兆豐金",
-          "weight": 2.03
+          "weight": 2.1
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
-        "added": [
-          {
-            "name": "兆豐金",
-            "code": "2886",
-            "weight": 2.03,
-            "diff": 2.03
-          }
-        ],
-        "removed": [
-          {
-            "name": "日月光投控",
-            "code": "3711",
-            "weight": 2.0,
-            "diff": -2.0
-          }
-        ],
+        "added": [],
+        "removed": [],
         "increased": [
           {
-            "name": "台積電",
-            "code": "2330",
-            "weight": 41.36,
-            "diff": 0.7000000000000028
-          },
-          {
-            "name": "台新新光金",
-            "code": "2887",
-            "weight": 3.12,
-            "diff": 0.06000000000000005
-          },
-          {
-            "name": "臺股期貨",
-            "code": "202611TX",
-            "weight": 3.07,
-            "diff": 0.3599999999999999
+            "name": "聯發科",
+            "code": "2454",
+            "weight": 5.27,
+            "diff": 0.1899999999999995
           },
           {
             "name": "元大金",
             "code": "2885",
-            "weight": 2.94,
-            "diff": 0.08000000000000007
-          },
-          {
-            "name": "鴻海",
-            "code": "2317",
-            "weight": 2.88,
-            "diff": 0.029999999999999805
+            "weight": 2.96,
+            "diff": 0.020000000000000018
           },
           {
             "name": "中華電",
             "code": "2412",
-            "weight": 2.64,
-            "diff": 0.08000000000000007
+            "weight": 2.79,
+            "diff": 0.1499999999999999
           },
           {
             "name": "玉山金",
             "code": "2884",
-            "weight": 2.44,
-            "diff": 0.06999999999999984
+            "weight": 2.49,
+            "diff": 0.050000000000000266
+          },
+          {
+            "name": "兆豐金",
+            "code": "2886",
+            "weight": 2.1,
+            "diff": 0.07000000000000028
           }
         ],
         "decreased": [
           {
-            "name": "聯發科",
-            "code": "2454",
-            "weight": 5.08,
-            "diff": -0.3099999999999996
+            "name": "台積電",
+            "code": "2330",
+            "weight": 41.2,
+            "diff": -0.1599999999999966
+          },
+          {
+            "name": "臺股期貨",
+            "code": "202611TX",
+            "weight": 2.98,
+            "diff": -0.08999999999999986
+          },
+          {
+            "name": "鴻海",
+            "code": "2317",
+            "weight": 2.86,
+            "diff": -0.020000000000000018
           },
           {
             "name": "台達電",
             "code": "2308",
-            "weight": 2.35,
-            "diff": -0.1200000000000001
+            "weight": 2.29,
+            "diff": -0.06000000000000005
           }
         ]
       }
@@ -773,56 +769,56 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台積電",
-          "weight": 10.91
-        },
-        {
-          "stock_code": "2383",
-          "stock_name": "台光電",
-          "weight": 5.94
+          "weight": 11.2
         },
         {
           "stock_code": "2454",
           "stock_name": "聯發科",
-          "weight": 5.88
+          "weight": 6.2
+        },
+        {
+          "stock_code": "2383",
+          "stock_name": "台光電",
+          "weight": 5.77
         },
         {
           "stock_code": "3037",
           "stock_name": "欣興",
-          "weight": 5.54
+          "weight": 5.25
         },
         {
           "stock_code": "3017",
           "stock_name": "奇鋐",
-          "weight": 5.39
+          "weight": 5.05
         },
         {
           "stock_code": "3443",
           "stock_name": "創意電子",
-          "weight": 4.59
+          "weight": 4.63
         },
         {
           "stock_code": "3653",
           "stock_name": "健策",
-          "weight": 3.78
-        },
-        {
-          "stock_code": "3711",
-          "stock_name": "日月光投控",
-          "weight": 3.33
-        },
-        {
-          "stock_code": "8046",
-          "stock_name": "南電",
-          "weight": 3.31
+          "weight": 3.54
         },
         {
           "stock_code": "1303",
           "stock_name": "南亞",
-          "weight": 3.06
+          "weight": 3.34
+        },
+        {
+          "stock_code": "3711",
+          "stock_name": "日月光投控",
+          "weight": 3.2
+        },
+        {
+          "stock_code": "8046",
+          "stock_name": "南電",
+          "weight": 3.11
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
         "added": [],
         "removed": [],
@@ -830,64 +826,64 @@ window.dashboardData = {
           {
             "name": "台積電",
             "code": "2330",
-            "weight": 10.91,
-            "diff": 0.5800000000000001
+            "weight": 11.2,
+            "diff": 0.28999999999999915
           },
           {
             "name": "聯發科",
             "code": "2454",
-            "weight": 5.88,
-            "diff": 0.13999999999999968
+            "weight": 6.2,
+            "diff": 0.3200000000000003
+          },
+          {
+            "name": "創意電子",
+            "code": "3443",
+            "weight": 4.63,
+            "diff": 0.040000000000000036
+          },
+          {
+            "name": "南亞",
+            "code": "1303",
+            "weight": 3.34,
+            "diff": 0.2799999999999998
           }
         ],
         "decreased": [
           {
             "name": "台光電",
             "code": "2383",
-            "weight": 5.94,
-            "diff": -0.0699999999999994
+            "weight": 5.77,
+            "diff": -0.17000000000000082
           },
           {
             "name": "欣興",
             "code": "3037",
-            "weight": 5.54,
-            "diff": -0.04999999999999982
+            "weight": 5.25,
+            "diff": -0.29000000000000004
           },
           {
             "name": "奇鋐",
             "code": "3017",
-            "weight": 5.39,
-            "diff": -0.16999999999999993
-          },
-          {
-            "name": "創意電子",
-            "code": "3443",
-            "weight": 4.59,
-            "diff": -0.1900000000000004
+            "weight": 5.05,
+            "diff": -0.33999999999999986
           },
           {
             "name": "健策",
             "code": "3653",
-            "weight": 3.78,
-            "diff": -0.16000000000000014
+            "weight": 3.54,
+            "diff": -0.23999999999999977
           },
           {
             "name": "日月光投控",
             "code": "3711",
-            "weight": 3.33,
-            "diff": -0.10000000000000009
+            "weight": 3.2,
+            "diff": -0.1299999999999999
           },
           {
             "name": "南電",
             "code": "8046",
-            "weight": 3.31,
-            "diff": -0.14000000000000012
-          },
-          {
-            "name": "南亞",
-            "code": "1303",
-            "weight": 3.06,
-            "diff": -0.1299999999999999
+            "weight": 3.11,
+            "diff": -0.20000000000000018
           }
         ]
       }
@@ -899,56 +895,56 @@ window.dashboardData = {
         {
           "stock_code": "2330",
           "stock_name": "台灣積體",
-          "weight": 16.023
+          "weight": 16.248
         },
         {
           "stock_code": "2383",
           "stock_name": "台光電子",
-          "weight": 9.427
-        },
-        {
-          "stock_code": "3037",
-          "stock_name": "欣興電子",
-          "weight": 7.371
+          "weight": 9.345
         },
         {
           "stock_code": "2408",
           "stock_name": "南亞科技",
-          "weight": 7.173
+          "weight": 7.282
+        },
+        {
+          "stock_code": "3037",
+          "stock_name": "欣興電子",
+          "weight": 7.127
         },
         {
           "stock_code": "2454",
           "stock_name": "聯發科技",
-          "weight": 6.777
+          "weight": 7.064
         },
         {
           "stock_code": "2059",
           "stock_name": "川湖科技",
-          "weight": 6.74
+          "weight": 6.991
         },
         {
           "stock_code": "3017",
           "stock_name": "奇鋐科技",
-          "weight": 6.553
-        },
-        {
-          "stock_code": "8046",
-          "stock_name": "南亞電路",
-          "weight": 5.877
+          "weight": 6.488
         },
         {
           "stock_code": "3189",
           "stock_name": "景碩科技",
-          "weight": 5.86
+          "weight": 5.654
+        },
+        {
+          "stock_code": "8046",
+          "stock_name": "南亞電路",
+          "weight": 5.629
         },
         {
           "stock_code": "1303",
           "stock_name": "南亞塑膠",
-          "weight": 4.877
+          "weight": 4.991
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": true,
         "added": [],
         "removed": [],
@@ -956,64 +952,64 @@ window.dashboardData = {
           {
             "name": "台灣積體",
             "code": "2330",
-            "weight": 16.023,
-            "diff": 0.9059999999999988
+            "weight": 16.248,
+            "diff": 0.22500000000000142
+          },
+          {
+            "name": "南亞科技",
+            "code": "2408",
+            "weight": 7.282,
+            "diff": 0.10899999999999999
           },
           {
             "name": "聯發科技",
             "code": "2454",
-            "weight": 6.777,
-            "diff": 0.38700000000000045
+            "weight": 7.064,
+            "diff": 0.2869999999999999
+          },
+          {
+            "name": "川湖科技",
+            "code": "2059",
+            "weight": 6.991,
+            "diff": 0.25099999999999945
+          },
+          {
+            "name": "南亞塑膠",
+            "code": "1303",
+            "weight": 4.991,
+            "diff": 0.11399999999999988
           }
         ],
         "decreased": [
           {
             "name": "台光電子",
             "code": "2383",
-            "weight": 9.427,
-            "diff": -0.36599999999999966
+            "weight": 9.345,
+            "diff": -0.08199999999999896
           },
           {
             "name": "欣興電子",
             "code": "3037",
-            "weight": 7.371,
-            "diff": -0.27999999999999936
-          },
-          {
-            "name": "南亞科技",
-            "code": "2408",
-            "weight": 7.173,
-            "diff": -0.2709999999999999
-          },
-          {
-            "name": "川湖科技",
-            "code": "2059",
-            "weight": 6.74,
-            "diff": -0.040000000000000036
+            "weight": 7.127,
+            "diff": -0.24400000000000066
           },
           {
             "name": "奇鋐科技",
             "code": "3017",
-            "weight": 6.553,
-            "diff": -0.18400000000000016
-          },
-          {
-            "name": "南亞電路",
-            "code": "8046",
-            "weight": 5.877,
-            "diff": -0.2290000000000001
+            "weight": 6.488,
+            "diff": -0.0649999999999995
           },
           {
             "name": "景碩科技",
             "code": "3189",
-            "weight": 5.86,
-            "diff": -0.22699999999999942
+            "weight": 5.654,
+            "diff": -0.2060000000000004
           },
           {
-            "name": "南亞塑膠",
-            "code": "1303",
-            "weight": 4.877,
-            "diff": -0.18700000000000028
+            "name": "南亞電路",
+            "code": "8046",
+            "weight": 5.629,
+            "diff": -0.24800000000000022
           }
         ]
       }
@@ -1114,7 +1110,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -1258,7 +1254,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -1397,7 +1393,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -1571,7 +1567,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -1725,7 +1721,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -1849,7 +1845,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -2003,7 +1999,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
@@ -2172,7 +2168,7 @@ window.dashboardData = {
         }
       ],
       "compare": {
-        "prev_date": "2026-11-04",
+        "prev_date": "2026-11-05",
         "has_changes": false,
         "added": [],
         "removed": [],
